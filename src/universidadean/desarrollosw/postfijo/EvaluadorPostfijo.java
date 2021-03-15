@@ -33,7 +33,38 @@ public class EvaluadorPostfijo {
         Stack<Integer> pila = new Stack<>();
 
         // TODO: Realiza la evaluación de la expresión en formato postfijo
-
+        for (int i= 0; i < expresion.size(); ++i){
+            String elem = expresion.get(i);
+            int u,p = 0;
+            switch (elem) {
+                case "/":
+                    u = pila.pop();
+                    p = pila.pop();
+                    if (u != 0)
+                        pila.push(p/u);
+                    else
+                        pila.push(0);
+                    break;
+                case "*":
+                    u = pila.pop();
+                    p = pila.pop();
+                    pila.push(p*u);
+                    break;
+                case "+":
+                    u = pila.pop();
+                    p = pila.pop();
+                    pila.push(p+u);
+                    break;
+                case "-":
+                    u = pila.pop();
+                    p = pila.pop();
+                    pila.push(p-u);
+                    break;
+                default:
+                    pila.push(Integer.parseInt(elem));
+                    break;
+            }
+        }
         return pila.pop();
     }
 
@@ -48,10 +79,6 @@ public class EvaluadorPostfijo {
 
         try {
             List<String> expresion = Token.dividir(linea);
-            for (int i= 0; i < expresion.size(); ++i){
-                String elem = expresion.get(i);
-                System.out.println(i + " : " + elem);
-            }
             System.out.println(evaluarPostFija(expresion));
         }
         catch (Exception e) {
