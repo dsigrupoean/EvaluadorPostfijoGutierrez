@@ -48,6 +48,10 @@ public class EvaluadorPostfijo {
 
         try {
             List<String> expresion = Token.dividir(linea);
+            for (int i= 0; i < expresion.size(); ++i){
+                String elem = expresion.get(i);
+                System.out.println(i + " : " + elem);
+            }
             System.out.println(evaluarPostFija(expresion));
         }
         catch (Exception e) {
